@@ -1,0 +1,39 @@
+# This workflow will build a .NET project
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
+
+name: .NET
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: "lts/*"
+    - name: Install dependencies
+      run: |
+        npm install semantic-release@19.0.2;
+        npm i -D @semantic-release/changelog;
+        npm i -D @semantic-release/commit-analyzer;
+        npm i -D @semantic-release/release-notes-generator;
+        npm i -D @droidsolutions-oss/semantic-release-update-file;
+        npm i -D @semantic-release/npm;
+        npm i -D @semantic-release/github;
+        npm i -D @semantic-release/git;
+
+    - name: Release
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      run: |
+        npx semantic-release;
