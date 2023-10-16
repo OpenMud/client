@@ -1,6 +1,6 @@
 {
   "name": "openmud",
-  "version": "1.0.5",
+  "version": "1.0.0",
   "description": "OpenMud Client",
   "homepage": "https://openmud.github.io/",
   "repository": {
@@ -51,12 +51,16 @@
     "react": "^18.2.0",
     "react-command-palette": "^0.22.1",
     "react-dom": "^18.2.0",
+    "semantic-release": "^19.0.2",
     "sweetalert2-react-content": "^5.0.7"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^1.0.0-beta.22",
     "@antfu/ni": "^0.21.8",
     "@antfu/utils": "^0.7.6",
+    "@droidsolutions-oss/semantic-release-update-file": "^1.3.2",
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/git": "^10.0.1",
     "@types/node": "^20.8.3",
     "@types/react-command-palette": "^0.18.2",
     "bumpp": "^9.2.0",
