@@ -2,6 +2,7 @@
   "name": "openmud",
   "version": "1.0.5",
   "description": "OpenMud Client",
+  "release": { "branches": [ "main" ] },
   "homepage": "https://openmud.github.io/",
   "repository": {
     "type": "git",
