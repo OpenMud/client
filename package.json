@@ -1,7 +1,12 @@
 {
   "name": "openmud",
   "version": "1.0.5",
-  "description": "",
+  "description": "OpenMud Client",
+  "homepage": "https://openmud.github.io/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/OpenMud/OpenMud.git"
+  },
   "type": "module",
   "exports": {
     ".": {
