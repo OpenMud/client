@@ -5,7 +5,7 @@
   "homepage": "https://openmud.github.io/",
   "repository": {
     "type": "git",
-    "url": "https://github.com/OpenMud/OpenMud.git"
+    "url": "https://github.com/OpenMud/client.git"
   },
   "type": "module",
   "exports": {
