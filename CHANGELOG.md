@@ -1,3 +1,19 @@
+# [2.0.0](https://github.com/OpenMud/client/compare/v1.0.0...v2.0.0) (2023-10-20)
+
+
+* Merge pull request #2 from OpenMud/feature-sound ([273f704](https://github.com/OpenMud/client/commit/273f70474f8b4646f7bf22f089f29ebe0a6159b8)), closes [#2](https://github.com/OpenMud/client/issues/2)
+
+
+### Features
+
+* **common:** Added support found sound. ([a328cc3](https://github.com/OpenMud/client/commit/a328cc349cab75d574a64281cb37ab1402cc0d54))
+
+
+### BREAKING CHANGES
+
+* Force major version update.
+* **common:** Force major version update.
+
 # 1.0.0 (2023-10-16)
 
 
