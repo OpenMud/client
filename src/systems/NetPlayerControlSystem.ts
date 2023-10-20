@@ -74,22 +74,6 @@ export class NetPlayerControlSystem extends System<NetPlayerCharacterComponent> 
       this.lastMovement = newMovement;
       this.scene?.emit('dispatchMovement', new DispatchMovementMessage(this.lastPlayer, this.lastMovement));
     }
-    /*
-    if (deltaX == 0 && deltaY == 0) {
-      if (entity.has('requestMovement')) {
-        entity.removeComponent('requestMovement');
-      }
-    } else {
-      if (entity.has('requestMovement')) {
-        const currentMovement = entity.get<RequestMovementComponent>('requestMovement')!;
-
-        if (currentMovement.x != deltaX || currentMovement.y != deltaY) {
-          entity.removeComponent('requestMovement', true);
-          entity.addComponent(new RequestMovementComponent(deltaX, deltaY));
-        }
-      } else
-        entity.addComponent(new RequestMovementComponent(deltaX, deltaY));
-    }*/
   }
 
   private removeSelected(name: string | undefined): void {
