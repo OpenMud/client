@@ -1,3 +1,15 @@
+# [3.0.0](https://github.com/OpenMud/client/compare/v2.0.0...v3.0.0) (2023-10-20)
+
+
+### Features
+
+* **core:** Forcing major version advancement. ([47d8866](https://github.com/OpenMud/client/commit/47d8866c50a29ad73b3240e3bef4bdd23daa6d94))
+
+
+### BREAKING CHANGES
+
+* **core:** Forcing major version advancement.
+
 # [2.0.0](https://github.com/OpenMud/client/compare/v1.0.0...v2.0.0) (2023-10-20)
 
 
