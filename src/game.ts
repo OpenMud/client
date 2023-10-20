@@ -6,15 +6,15 @@ import { NetPositionSystem } from './systems/NetPositionSystem';
 import { ICommandInteractionWidget, NetPlayerControlSystem } from './systems/NetPlayerControlSystem';
 import { PositionLerpingSystem } from './systems/PositionLerpingSystem';
 import { SvrActionableCommands } from './models/SvrActionableCommands';
-import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { DispatchVerbMessage } from './messages/DispatchVerbMessage';
 import { NetRequestDispatcherSystem } from './systems/NetRequestDispatcherSystem';
 import { HubConnectionBuilder, HubConnection, JsonHubProtocol } from '@microsoft/signalr';
+import { SoundSystem } from './systems/SoundSystem';
 
 export class MudGame extends Engine {
   private playerControlSystem: NetPlayerControlSystem | undefined = undefined;
 
-  constructor(canvas: string, private readonly resourceLoader: Loader, private readonly gameIcons: any, private readonly gameIconAnimationsIndex: any) {
+  constructor(canvas: string, private readonly resourceLoader: Loader, private readonly gameSounds: any, private readonly gameIcons: any, private readonly gameIconAnimationsIndex: any) {
     super({
       displayMode: DisplayMode.FillScreen,
       canvasElementId: canvas,
@@ -44,6 +44,7 @@ export class MudGame extends Engine {
     this.currentScene.world.add(this.playerControlSystem!);
     this.currentScene.world.add(new PositionLerpingSystem());
     this.currentScene.world.add(new NetRequestDispatcherSystem(connection));
+    this.currentScene.world.add(new SoundSystem(this.gameSounds));
   }
 
   dispatchCommand(entity: string | undefined, commandString: string) {

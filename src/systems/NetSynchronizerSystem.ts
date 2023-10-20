@@ -15,6 +15,9 @@ import { NetPlayerCharacterComponent } from "../components/NetPlayerCharacterCom
 import { NetActionableCommands } from "../components/NetActionableCommands";
 import { NetVisibilityComponent } from "../components/NetVisibilityComponent";
 import { SvrEntitySet } from "../models/SvrEntitySet";
+import { SvrWorldEchoMessage } from "models/SvrWorldEchoMessage";
+import { SvrConfigureSoundMessage } from "../models/SvrConfigureSoundMessage";
+import { ConfigureSoundMessage } from "../messages/ConfigureSoundMessage";
 
 export class NetSynchronizerSystem extends System<NetworkedComponent> {
   public readonly types = ['networked'] as const;
@@ -32,31 +35,26 @@ export class NetSynchronizerSystem extends System<NetworkedComponent> {
     super();
 
     this.hubConnection.on('DeleteEntity', (frame: number, identifier: string) => {
-      //console.log(`Delete: ${frame}, ${identifier}`);
       this.queuePending(identifier, new NetDeletedComponent(frame));
     });
 
     this.hubConnection.on('SetPosition', (frame: number, identifier: string, position: SvrPosition) => {
-      console.log("Set Position: " + position);
       this.queuePending(identifier, new NetPositionComponent(frame, true, position));
     });
 
     this.hubConnection.on('SetIcon', (frame: number, identifier: string, icon: SvrIcon) => {
-      //console.log(`SetIcon: ${frame}, ${identifier}, ${icon}`);
+      console.log(`SetIcon: ${frame}, ${identifier}, ${icon}`);
       this.queuePending(identifier, new NetConfigureIconComponent(frame, true, icon));
     });
 
     this.hubConnection.on('SetCommands', (frame: number, identifier: string, commands: SvrActionableCommands) => {
-      //console.log(`SetCommands: ${frame}, ${identifier}, ${commands}`);
       const c = commands.commands.map(x => x.verb);
       console.log("Commands: " + commands.commands);
       this.queuePending(identifier, new NetActionableCommands(frame, true, commands));
     });
 
     this.hubConnection.on('SetDirection', (frame: number, identifier: string, direction: SvrDirection) => {
-      //console.log(`SetCommands: ${frame}, ${identifier}, ${direction}`);
       this.queuePending(identifier, new NetDirectionComponent(frame, true, direction));
-
       this.queuePending(identifier, NetConfigureIconComponent.CreateRefresh());
     });
 
@@ -72,7 +70,6 @@ export class NetSynchronizerSystem extends System<NetworkedComponent> {
         this.queuePending(i, new NetVisibilityComponent(frame, true, true));
         this.queuePending(i, NetConfigureIconComponent.CreateRefresh());
       }
-      //this.queuePending(identifier, new NetPlayerCharacterComponent(frame));
     });
 
     this.hubConnection.on('SetInvisible', (frame: number, player: string, visibility: SvrEntitySet) => {
@@ -82,7 +79,19 @@ export class NetSynchronizerSystem extends System<NetworkedComponent> {
         this.queuePending(i, new NetVisibilityComponent(frame, true, false));
         this.queuePending(i, NetConfigureIconComponent.CreateRefresh());
       }
-      //this.queuePending(identifier, new NetPlayerCharacterComponent(frame));
+    });
+
+    this.hubConnection.on('OnWorldMessage', (frame: number, msg: SvrWorldEchoMessage) => {
+      console.log("World echo: " + msg.message);
+    });
+
+    this.hubConnection.on('OnEchoMessage', (frame: number, msg: SvrWorldEchoMessage) => {
+      console.log("Entity echo: " + msg.message);
+    });
+
+    this.hubConnection.on('OnConfigureSoundMessage', (frame: number, msg: SvrConfigureSoundMessage) => {
+      console.log(`Server sound ${frame}, ${msg.channel}, ${msg.configuration}, ${msg.sound}`);
+      this.scene?.emit('configureSound', new ConfigureSoundMessage(msg.sound, msg.channel, msg.configuration, frame));
     });
   }
 
