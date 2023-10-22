@@ -1,3 +1,10 @@
+# [3.1.0](https://github.com/OpenMud/client/compare/v3.0.0...v3.1.0) (2023-10-22)
+
+
+### Features
+
+* **core:** Added support for world / entity echo messages. ([dc82f54](https://github.com/OpenMud/client/commit/dc82f548801d6b9c3d04208327a49816a4bf76f3))
+
 # [3.0.0](https://github.com/OpenMud/client/compare/v2.0.0...v3.0.0) (2023-10-20)
 
 
