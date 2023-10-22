@@ -82,11 +82,11 @@ export class NetSynchronizerSystem extends System<NetworkedComponent> {
     });
 
     this.hubConnection.on('OnWorldMessage', (frame: number, msg: SvrWorldEchoMessage) => {
-      console.log("World echo: " + msg.message);
+      this.scene?.emit("worldEcho", msg);
     });
 
     this.hubConnection.on('OnEchoMessage', (frame: number, msg: SvrWorldEchoMessage) => {
-      console.log("Entity echo: " + msg.message);
+      this.scene?.emit("entityEcho", msg);
     });
 
     this.hubConnection.on('OnConfigureSoundMessage', (frame: number, msg: SvrConfigureSoundMessage) => {
