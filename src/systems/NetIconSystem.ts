@@ -73,8 +73,10 @@ export class NetIconSystem extends System<NetConfigureIconComponent> {
     const icon = workingConfig.icon!.icon;
     const fieldName = icon as keyof typeof this.gameIcons;
 
-    if (!this.gameIcons.hasOwnProperty(fieldName))
+    if (!this.gameIcons.hasOwnProperty(fieldName)) {
+      console.error(`Game Icon resource not found in library ${icon}; Will not set the icon...`);
       return;
+    }
 
     const animation = this.resolveIconAnimation(entity);
 
